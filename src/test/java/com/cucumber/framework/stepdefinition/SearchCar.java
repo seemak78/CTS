@@ -1,0 +1,118 @@
+package com.cucumber.framework.stepdefinition;
+
+import java.time.LocalDateTime;
+
+import java.time.format.DateTimeFormatter;
+
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
+
+import com.cucumber.framework.configreader.PropertyFileReader;
+import com.cucumber.framework.helper.DatabaseHelper.Searchreport;
+import com.cucumber.framework.helper.DatabaseHelper.SqlLiteHelper;
+import com.cucumber.framework.helper.Generic.GenericHelper;
+import com.cucumber.framework.helper.Logger.LoggerHelper;
+import com.cucumber.framework.helper.PageObject.homepage.CarPage;
+import com.cucumber.framework.helper.Wait.WaitHelper;
+import com.cucumber.framework.interfaces.IconfigReader;
+import com.cucumber.framework.settings.ObjectRepo;
+
+import cucumber.api.java.en.When;
+
+/**
+ * @author Seema
+ *
+ *
+ */
+
+public class SearchCar {
+	
+	private CarPage cPage=new CarPage(ObjectRepo.driver);
+	private final Logger log = LoggerHelper.getLogger(this.getClass());
+	private IconfigReader reader = new PropertyFileReader();
+	private SoftAssert softAssert = new SoftAssert();
+	private Searchreport  singleCarSearch = new Searchreport();
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+	private DateTimeFormatter dtf_time = DateTimeFormatter.ofPattern("HH");
+	private LocalDateTime now = LocalDateTime.now(); 
+	private LocalDateTime dtExecutionStart = null;
+	private LocalDateTime dtExecutionEnd = null;
+	private GenericHelper genHelp;
+	
+	@When("^: I search from \"([^\"]*)\" to \"([^\"]*)\" after (\\d+) days from today for (\\d+) days to find Car$")
+	public void i_search_from_to_after_days_from_today_for_days_to_find_Car(String fromCity, String toCity, int addDaysFuturedate, int returnDaysFromFutureDate) throws Throwable {
+		genHelp = new GenericHelper(cPage.getDriver());
+		dtExecutionStart = LocalDateTime.now();
+		singleCarSearch.setDateTime(now.format(dtf));
+		singleCarSearch.setTime(Integer.parseInt(now.format(dtf_time)));
+		singleCarSearch.setPlace(fromCity+" to "+toCity);
+
+		cPage.carTab.click();
+		genHelp.jQueryAutoCompleteDropdown(cPage.pickupCity,fromCity, 10,2000);
+		genHelp.jQueryAutoCompleteDropdown(cPage.dropoffCity,toCity, 10,2000);
+		String strDate=genHelp.dateCalculator(0,0, addDaysFuturedate);
+		singleCarSearch.setStartDate(strDate);
+		genHelp.populateReadonlyDate(cPage.pickupDate, strDate, "12:00");
+		strDate=genHelp.dateCalculator(0,0, (addDaysFuturedate+returnDaysFromFutureDate));
+		singleCarSearch.setEndDate(strDate);
+		singleCarSearch.setModule(cPage.getModule());
+		genHelp.populateReadonlyDate(cPage.dropoffDate, strDate, "15:00");
+		cPage.btnSearch.click();
+	
+		Thread.sleep(100);
+		singleCarSearch.setExecutionStart(dtExecutionStart.toString());
+		WaitHelper wait = new WaitHelper(cPage.getDriver(), reader);		
+		wait.untilJqueryIsDone(120);
+
+	}
+
+	@When("^: Find number of cars for hire$")
+	public void find_number_of_cars_for_hire() throws Throwable {
+		Boolean isPresent = cPage.resultBoxes.size()>0; //cPage.getDriver().findElements(By.cssSelector("li[class='car_main_li_box']")).size() > 0;
+		System.out.println("size:"+cPage.resultBoxes.size());
+		String strRec;		
+		String lowestPrice = null;
+		if (isPresent)
+		{	
+			strRec = cPage.numOfCars.getText();
+			System.out.println("StrRec:"+strRec);
+			if (Integer.parseInt(strRec)>0)
+			{
+				lowestPrice= cPage.lowestPrice.getText();
+				log.info("Total Cars found: "+strRec+"- Lowest Price:"+lowestPrice);
+		
+				System.out.println("Total Cars found: "+strRec+"- Lowest Price:"+lowestPrice);
+			} else
+			{
+				strRec="0";
+				log.info("No Cars displayed");
+				System.out.println("No Cars displayed");
+			}
+		} else
+		{
+			strRec="0";
+			isPresent = cPage.getDriver().findElements(By.cssSelector("div[class='error_car_in']")).size() > 0;
+			genHelp.takeScreenShot("Car_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			if (isPresent)
+			{	
+				softAssert.assertTrue(false, "Car error");
+				log.error("Car Error");
+			}
+			else
+				log.info("Car result section not available");
+				System.out.println("Car result section not available");
+		}
+		singleCarSearch.setNumRecords(Integer.parseInt(strRec));
+		singleCarSearch.setLowestPrice(lowestPrice);
+		dtExecutionEnd = LocalDateTime.now();
+		singleCarSearch.setExecutionEnd(dtExecutionEnd.toString());
+		singleCarSearch.setDiffExecutionTime();
+		singleCarSearch.setCorelationId("NA");
+		SqlLiteHelper.saveRecordsSearchResultsTable(singleCarSearch);
+		//createSearchReport();
+	}
+}

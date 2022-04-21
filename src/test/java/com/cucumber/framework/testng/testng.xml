@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener
+			class-name="com.cucumber.framework.listeners.reportlistener.CucumberReport" />
+	</listeners>
+	<test name="CTS-Searches">
+		<classes>
+			<class name="com.cucumber.framework.runner.SearchHotelFeatureRunner" />
+			<class name="com.cucumber.framework.runner.SearchFlightFeatureRunner" />
+			<class name="com.cucumber.framework.runner.SearchCarFeatureRunner" />
+			<!-- class name="com.cucumber.framework.runner.ReportGeneratorFeatureRunner" /-->
+			<!-- class name="com.cucumber.framework.runner.LaptopFeatureRunner" />
+			<class name="com.cucumber.framework.runner.TabletFeatureRunner" />
+			<class name="com.cucumber.framework.runner.SearchWithFilterRunner" /-->
+		</classes>
+	</test>
+</suite> 
