@@ -54,10 +54,10 @@ public class SearchHotel {
 		ObjectRepo.data.put("LoginPage", hPage);
 	}
 
-	@When("^: I enter \"([^\"]*)\" and \"([^\"]*)\" to login$")
-	public void i_enter_username_and_password_to_login(String uname, String pwd){
+	@When("^: I enter username and password to login$")
+	public void i_enter_username_and_password_to_login(){
     	lPage.acceptCookies();
-		lPage.login(uname, pwd);
+		lPage.login();
 	}
 	
 	@And("^: I am logged in with message \"([^\"]*)\" succesfully")
