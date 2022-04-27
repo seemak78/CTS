@@ -36,16 +36,15 @@ public class SearchActivity {
 	private LocalDateTime dtExecutionEnd = null;
 	private GenericHelper genHelp;
 	
-	@And("^: I search in \"([^\"]*)\" to after (\\d+) from today for (\\d+) days to find Activity$")
+	
+	@When("^: I search in \"([^\"]*)\" to after (\\d+) from today for (\\d+) days to find activity$")
 	public void i_search_in_to_after_from_today_for_days_to_find_activity(String searchKey, int addDaysFuturedate, int durOfStayinDays) throws Throwable {
-		
 		genHelp = new GenericHelper(aPage.getDriver());
 		dtExecutionStart = LocalDateTime.now();
 		singleactivitySearch.setDateTime(now.format(dtf));
 		singleactivitySearch.setTime(Integer.parseInt(now.format(dtf_time)));
 		singleactivitySearch.setPlace(searchKey);
 	
-
 		aPage.activityTab.click();
 		genHelp.jQueryAutoCompleteDropdown(aPage.location,searchKey, 10,1000);
 		String strDate=genHelp.dateCalculator(0,0, addDaysFuturedate);
@@ -58,9 +57,10 @@ public class SearchActivity {
 		singleactivitySearch.setExecutionStart(dtExecutionStart.toString());
 		WaitHelper wait = new WaitHelper(aPage.getDriver(), reader);		
 		wait.untilJqueryIsDone(120);
-
 	}
 
+	
+	
 	@When("^: Find number of activities$")
 	public void find_number_of_activities() throws Throwable {
 		Boolean isPresent = aPage.resultBoxes.size()>0; 
