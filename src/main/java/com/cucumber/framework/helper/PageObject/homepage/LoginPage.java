@@ -8,8 +8,11 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.cucumber.framework.configreader.PropertyFileReader;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
 import com.cucumber.framework.helper.PageObject.PageBase;
+import com.cucumber.framework.interfaces.IconfigReader;
+import com.cucumber.framework.settings.ObjectRepo;
 
 public class LoginPage extends PageBase {
 	
@@ -45,9 +48,9 @@ public class LoginPage extends PageBase {
 	}
 	
 	
-	public void login(String username, String passkey) {
-		email.sendKeys(username);
-		password.sendKeys(passkey);
+	public void login() {
+		email.sendKeys(ObjectRepo.reader.getWebsiteUsername());
+		password.sendKeys(ObjectRepo.reader.getWebsitePassword());
 		loginbutton.click();
 		log.info("Login complete");
 	}

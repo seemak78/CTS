@@ -145,7 +145,16 @@ public class PropertyFileReader implements IconfigReader {
 
 	@Override
 	public String getReportLocation() {
-		// TODO Auto-generated method stub
 		return prop.getProperty("report.location");
+	}
+
+	@Override
+	public String getWebsiteUsername() {
+		return prop.getProperty("website.username");
+	}
+
+	@Override
+	public String getWebsitePassword() {
+		return prop.getProperty("website.password");
 	}
 }
