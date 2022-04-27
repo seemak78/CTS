@@ -137,7 +137,7 @@ public class SearchHotel {
 		singleHotelSearch.setModule(hPage.getModule());
 		singleHotelSearch.setCorelationId(navHelp.getParamFromCurrentURL("correlationId"));
 		SqlLiteHelper.saveRecordsSearchResultsTable(singleHotelSearch);
-		SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
+		//SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
 	}
 
 	@Given("^: Generate report for all my searches$")

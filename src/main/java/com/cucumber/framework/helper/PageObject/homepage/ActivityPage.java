@@ -52,8 +52,11 @@ public class ActivityPage extends PageBase {
 	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div/div/div/div[2]/div[3]/ul/li[1]/div/div[1]/div[3]/div/p/text()")
 	public WebElement lowestPrice;	
 	
-	@FindBy(how=How.CSS,using="li[class='activity_main_li_box']")
+	//@FindBy(how=How.CSS,using="li[class='activity_main_li_box']")
+	@FindBy(how=How.XPATH,using="/html/body/div[3]/div/section/div/div/div/div[1]/div[1]/div/div")
 	public List<WebElement> resultBoxes;
+	
+	
 	
 	/** Public Methods  **/	
 	public WebDriver getDriver() {
