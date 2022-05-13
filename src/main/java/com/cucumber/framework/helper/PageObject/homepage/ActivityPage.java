@@ -46,8 +46,9 @@ public class ActivityPage extends PageBase {
 	@FindBy(how=How.XPATH,using="//*[@id=\"activitySearchForm\"]/button")
 	public WebElement btnSearch;
 	
-	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div/div/div/div[1]/div[1]/div/div")
-	public WebElement numOfActivity;	
+	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div/div/div/div[1]/div[1]/div/div/span")
+	public WebElement numOfActivity;
+	
 	
 	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div/div/div/div[2]/div[3]/ul/li[1]/div/div[1]/div[3]/div/p/text()")
 	public WebElement lowestPrice;	

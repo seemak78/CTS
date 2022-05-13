@@ -68,10 +68,11 @@ public class SearchActivity {
 		String lowestPrice = null;
 		if (isPresent)
 		{	
-			strRec = aPage.numOfActivity.getText();
+			System.out.println("Total records:"+aPage.numOfActivity.getText());
+			strRec = extractInt(aPage.numOfActivity.getText());
 			if (Integer.parseInt(strRec)>0)
 			{
-				lowestPrice= aPage.lowestPrice.getText();
+				lowestPrice= "0"; //aPage.lowestPrice.getText();
 				log.info("Total activities found: "+strRec+"- Lowest Price:"+lowestPrice);
 		
 				System.out.println("Total activities found: "+strRec+"- Lowest Price:"+lowestPrice);
@@ -104,4 +105,25 @@ public class SearchActivity {
 		SqlLiteHelper.saveRecordsSearchResultsTable(singleactivitySearch);
 		//createSearchReport();
 	}
+	
+	static String extractInt(String str)
+    {
+        // Replacing every non-digit number
+        // with a space(" ")
+        str = str.replaceAll("[^\\d]", " ");
+  
+        // Remove extra spaces from the beginning
+        // and the ending of the string
+        str = str.trim();
+  
+        // Replace all the consecutive white
+        // spaces with a single space
+        str = str.replaceAll(" +", " ");
+  
+        if (str.equals(""))
+            return "-1";
+  
+        return str;
+    }
+  
 }

@@ -54,6 +54,7 @@ public class SearchCar {
 		cPage.carTab.click();
 		genHelp.jQueryAutoCompleteDropdown(cPage.pickupCity,fromCity, 10,2000);
 		genHelp.jQueryAutoCompleteDropdown(cPage.dropoffCity,toCity, 10,2000);
+		Thread.sleep(100);
 		String strDate=genHelp.dateCalculator(0,0, addDaysFuturedate);
 		singleCarSearch.setStartDate(strDate);
 		genHelp.populateReadonlyDate(cPage.pickupDate, strDate, "12:00");
