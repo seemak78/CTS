@@ -11,6 +11,9 @@ Feature: Search Hotel
 
   #Invalid login credentials
  
+ 
+ 
+ 
   @chrome
   Scenario Outline: Login and Search Hotel
     Given : I am at the login home page
@@ -21,12 +24,12 @@ Feature: Search Hotel
 
     Examples: 
        | message                        | city                                                  | addDaysFromToday | addDaysToFromToday |
-#        | Welcome to Insider Travel Club | Los Angeles, California, United States of America     |               60 |                  4 |
-#        | Welcome to Insider Travel Club | New York, New York, United States of America          |               60 |                  4 |
+        | Welcome to Insider Travel Club | Los Angeles, California, United States of America     |               60 |                  4 |
+        | Welcome to Insider Travel Club | New York, New York, United States of America          |               60 |                  4 |
 #        | Welcome to Insider Travel Club | Chicago, Illinois, United States of America           |               60 |                  4 |
 #        | Welcome to Insider Travel Club | Houston, Texas, United States of America              |               60 |                  4 |
 #        | Welcome to Insider Travel Club | Phoenix, Arizona, United States of America            |               60 |                  4 |
-       |Welcome to Insider Travel Club | Philadelphia, Pennsylvania, United States of America  |               60 |                  4 |
+#        |Welcome to Insider Travel Club | Philadelphia, Pennsylvania, United States of America  |               60 |                  4 |
 #        | Welcome to Insider Travel Club | San Antonio, Texas, United States of America          |               60 |                  4 |
 #        | Welcome to Insider Travel Club | San Diego, California, United States of America       |               60 |                  4 |
 #        | Welcome to Insider Travel Club | Dallas, Texas, United States of America               |               60 |                  4 |

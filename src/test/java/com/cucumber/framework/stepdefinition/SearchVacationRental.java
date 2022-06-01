@@ -59,17 +59,20 @@ public class SearchVacationRental {
 		//vPage.actions.moveToElement(ele);
 		//vPage.actions.click().build().perform();;
 		vPage.eleUS.click();
-		if (searchKey=="ALASKA")
+		if (searchKey.equals("ALASKA"))
+		{	System.out.println("Selected location:"+searchKey);
 			vPage.alaska.click();
-		else if (searchKey=="CALIFORNIA")
+		} else if (searchKey.equals("CALIFORNIA"))
+		{
+			System.out.println("Selected location:"+searchKey);
 			vPage.california.click();
+		}
 		
 		vPage.closebutton.click();
-		
+//		vPage.btnSearch.click();
 		String strDate=genHelp.dateCalculator(0,0, addDaysFuturedate);
 		singlevacationSearch.setStartDate(strDate);
-		strDate=genHelp.dateCalculator(0,0, (addDaysFuturedate+durOfStayinDays));
-		singlevacationSearch.setEndDate(strDate);
+
 		singlevacationSearch.setModule(vPage.getModule());
 		vPage.btnSearch.click();
 		Thread.sleep(100);
@@ -85,6 +88,7 @@ public void find_number_of_VR() throws Throwable {
    // throw new PendingException();
     Boolean isPresent = vPage.resultBoxes.size()>0; 
     		String strRec;		
+    		System.out.println("isPresent:"+isPresent);
 		String lowestPrice = null;
 		if (isPresent)
 		{	
@@ -108,7 +112,7 @@ public void find_number_of_VR() throws Throwable {
 		} else
 		{
 			strRec="0";
-			isPresent = vPage.getDriver().findElements(By.cssSelector("div[class='error_car_in']")).size() > 0;
+			isPresent = vPage.getDriver().findElements(By.xpath("div[class='//*[@id=\"result\"]/div/div/div/div[2]/div[2]/ul/li[1]/div']")).size() > 0;
 			genHelp.takeScreenShot("Activity_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
 			if (isPresent)
 			{	

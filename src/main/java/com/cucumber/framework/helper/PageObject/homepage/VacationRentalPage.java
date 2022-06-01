@@ -87,7 +87,7 @@ public class VacationRentalPage extends PageBase {
 	
 	//@FindBy(how=How.CSS,using="li[class='activity_main_li_box']")
 	//@FindBy(how=How.XPATH,using="/html/body/div[3]/div/section/div/div/div/div[1]/div[1]/div/div")
-	@FindBy(how=How.CSS,using="div[class='vacation_rentals_serach_box']")
+	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div/div/div/div[2]/div[2]/ul/li[1]/div")
 	public List<WebElement> resultBoxes;
 	
 	
