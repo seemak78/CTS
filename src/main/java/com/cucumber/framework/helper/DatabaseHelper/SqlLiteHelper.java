@@ -202,7 +202,7 @@ public class SqlLiteHelper {
 							body.concat(coorelationid);
 						}
 	    	try {
-				SendMail.send(reader.getSendEmailTo(), subject, body, outputFileName);
+				SendMail.send(reader.getBugEmailAddressTo(), subject, body, outputFileName);
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
 				log.error("Issue in Sending Email to create Bug:"+e.getMessage());
