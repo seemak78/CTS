@@ -23,7 +23,7 @@ import com.cucumber.framework.configreader.PropertyFileReader;
  * This class has the main code for sending mail
  */
 public class SendMail {
-	public static void send(String subject, String text, String filename) throws MessagingException {
+	public static void send(String emailTo, String subject, String text, String filename) throws MessagingException {
     /* Get the session object -
 	** Refer for props below in /src/main/resources/configfile/confiig.properties
 	*/
@@ -49,10 +49,9 @@ public class SendMail {
         message.setFrom(new InternetAddress(from));
         message.setRecipients(
                 Message.RecipientType.TO,
-                InternetAddress.parse(reader.getSendEmailTo())
+                InternetAddress.parse(emailTo)
         );
-        message.setSubject(subject);
-        message.setText(text);
+
 
       BodyPart objMessageBodyPart = new MimeBodyPart();
       // Option 3: Send text along with attachment

@@ -31,8 +31,8 @@ public interface IconfigReader {
 	public String getSmtpPort();
 	public String getEmail();
 	public String getEmailPassword();
-	public String getSendSearchEmailAfterTime();
 	public String getSendEmailTo();
 	public String getSQLiteDB();
 	public String getReportLocation();
+	public String getBugEmailAddressTo();
 }

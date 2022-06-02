@@ -110,6 +110,8 @@ public class GenericHelper implements IwebComponent {
 		return destPath.getAbsolutePath();
 	}
 
+	
+	
 	public String takeScreenShot() {
 		oLog.info("");
 		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);

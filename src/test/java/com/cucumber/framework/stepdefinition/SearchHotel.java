@@ -120,8 +120,9 @@ public class SearchHotel {
 		} else
 		{
 			strRec="0";
-			//isPresent =  hPage.getDriver().findElements(By.cssSelector("div[class='error_page']")).size() > 0;
-			genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("correlationId"));			
+			String screenshot = genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("correlationId"));	
+			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);
+			
 			if (hPage.errorList.size()>0 )
 			{	
 				softAssert.assertTrue(false, "Hotel error");

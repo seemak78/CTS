@@ -129,14 +129,16 @@ public class PropertyFileReader implements IconfigReader {
 		return Level.ALL;
 	}
 
-	public String getSendSearchEmailAfterTime() {
-		return prop.getProperty("SendSearchEmailAfter");
-	}
 
 	public String getSendEmailTo() {
 		return prop.getProperty("send_email_to");
 	}
 
+	public String getBugEmailAddressTo()
+	{
+		return prop.getProperty("email.for.bug");		
+	}
+	
 	@Override
 	public String getSQLiteDB() {
 		// TODO Auto-generated method stub

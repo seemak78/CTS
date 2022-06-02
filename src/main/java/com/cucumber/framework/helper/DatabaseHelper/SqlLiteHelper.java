@@ -177,17 +177,37 @@ public class SqlLiteHelper {
 		public static void dispatchEmail(String repDate, String outputFileName)
 		{
 			PropertyFileReader reader = new PropertyFileReader();
-			LocalTime currentTime = LocalDateTime.now().toLocalTime();
-			LocalTime timeToProcessEmail = LocalTime.parse(reader.getSendSearchEmailAfterTime());
-			if (currentTime.compareTo(timeToProcessEmail)>=0) //TimeToProcessEmail is greater than or equal to currentTime
-		    {
-		    	try {
-					SendMail.send("Search Report for "+repDate, "Please find attached report for different searches during the day.", outputFileName);
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					log.error("Issue in Sending Email createSearchReport:"+e.getMessage());
-				}
-		    }
+			String subject="[Automation Robot] Search Report for various module on "+repDate;
+			String body="Please refer attached report to understand state of searches during the day.";
+	    	try {
+				SendMail.send(reader.getSendEmailTo(), subject, body, outputFileName);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				log.error("Issue in Sending Email createSearchReport:"+e.getMessage());
+			}
 		}
+
+		public static void createBug(String module, String coorelationid, String location, String dateTime, String outputFileName)
+		{
+			PropertyFileReader reader = new PropertyFileReader();
+			String subject = null;
+				subject.concat("[Automation Bug] in "); subject.concat(module); subject.concat(" module no inventory is available");
+			String body = null;
+			body.concat("While searching for location:"); 
+						body.concat(location);
+						body.concat(" robot did not find invetory");
+						if (coorelationid!=null && coorelationid!="") 
+						{
+							body.concat("/nPlease refer correlation id for further debugging:");
+							body.concat(coorelationid);
+						}
+	    	try {
+				SendMail.send(reader.getSendEmailTo(), subject, body, outputFileName);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				log.error("Issue in Sending Email to create Bug:"+e.getMessage());
+			}
+		}
+
 
 }
