@@ -10,5 +10,5 @@ Feature: Search Hotel for every 15 minutes
 
     Examples: 
        | message                        | city                                                  | addDaysFromToday | addDaysToFromToday |
-     #   | Welcome to Insider Travel Club | Los Angeles, California, United States of America    |               60 |                  4 |
-         | Welcome to Insider Travel Club | Las Tunas, Las Tunas, Cuba       |               60 |                  4 |
+       | Welcome to Insider Travel Club | Los Angeles, California, United States of America    |               60 |                  4 |
+        # | Welcome to Insider Travel Club | Las Tunas, Las Tunas, Cuba       |               60 |                  4 |
