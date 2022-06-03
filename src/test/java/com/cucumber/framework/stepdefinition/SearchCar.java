@@ -89,7 +89,9 @@ public class SearchCar {
 				System.out.println("Total Cars found: "+strRec+"- Lowest Price:"+lowestPrice);
 			} else
 			{
+				String screenshot = genHelp.takeScreenShot(singleCarSearch.getDateTime());
 				strRec="0";
+				SqlLiteHelper.createBug(cPage.getModule(), "", singleCarSearch.getPlace(), singleCarSearch.getDateTime(), screenshot);
 				log.info("No Cars displayed");
 				System.out.println("No Cars displayed");
 			}
@@ -97,6 +99,8 @@ public class SearchCar {
 		{
 			strRec="0";
 			isPresent = cPage.getDriver().findElements(By.cssSelector("div[class='error_car_in']")).size() > 0;
+			String screenshot =genHelp.takeScreenShot("Car_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			SqlLiteHelper.createBug(cPage.getModule(), "", singleCarSearch.getPlace(), singleCarSearch.getDateTime(), screenshot);
 			genHelp.takeScreenShot("Car_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
 			if (isPresent)
 			{	

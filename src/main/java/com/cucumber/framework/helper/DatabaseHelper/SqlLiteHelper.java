@@ -180,7 +180,7 @@ public class SqlLiteHelper {
 			String subject="[Automation Robot] Search Report for various module on "+repDate;
 			String body="Please refer attached report to understand state of searches during the day.";
 	    	try {
-				SendMail.send(reader.getSendEmailTo(), subject, body, outputFileName);
+				SendMail.send("report", subject, body, outputFileName);
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
 				log.error("Issue in Sending Email createSearchReport:"+e.getMessage());
@@ -190,19 +190,14 @@ public class SqlLiteHelper {
 		public static void createBug(String module, String coorelationid, String location, String dateTime, String outputFileName)
 		{
 			PropertyFileReader reader = new PropertyFileReader();
-			String subject = null;
-				subject.concat("[Automation Bug] in "); subject.concat(module); subject.concat(" module no inventory is available");
-			String body = null;
-			body.concat("While searching for location:"); 
-						body.concat(location);
-						body.concat(" robot did not find invetory");
+			String subject = "[Automation Bug] in "+module+" module no inventory is available";
+			String body = "While searching for location:"+location+" robot did not find invetory";
 						if (coorelationid!=null && coorelationid!="") 
 						{
-							body.concat("/nPlease refer correlation id for further debugging:");
-							body.concat(coorelationid);
+							body= body + "<br><br>Please refer correlation id for further debugging:"+coorelationid;
 						}
 	    	try {
-				SendMail.send(reader.getBugEmailAddressTo(), subject, body, outputFileName);
+				SendMail.send("bug", subject, body, outputFileName);
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
 				log.error("Issue in Sending Email to create Bug:"+e.getMessage());

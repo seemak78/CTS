@@ -34,7 +34,12 @@ public class SendMail {
     prop.put("mail.smtp.port", reader.getSmtpPort()); //"465");
     prop.put("mail.smtp.ssl.enable", reader.getSSLEnabled()); //"true");
     prop.put("mail.smtp.auth", reader.getSmtpAuth()); //"true");
-    
+    if (emailTo.equals("report"))
+    	emailTo=reader.getSendEmailTo();
+    else if (emailTo.equals("bug"))
+       	emailTo= "support@customtravelsolutions.com";   //reader.getBugEmailAddressTo();
+       
+    System.out.println("email"+emailTo);
     
     Session session = Session.getInstance(prop,
             new javax.mail.Authenticator() {
@@ -66,7 +71,7 @@ public class SendMail {
       objMessageBodyPart.setFileName(filename.replace("target/", ""));
       multipart.addBodyPart(objMessageBodyPart);
       message.setContent(multipart);
-
+      message.setSubject(subject);
       // send message
       Transport.send(message);
 

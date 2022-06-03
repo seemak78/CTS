@@ -78,7 +78,9 @@ public class SearchActivity {
 				System.out.println("Total activities found: "+strRec+"- Lowest Price:"+lowestPrice);
 			} else
 			{
+				String screenshot = genHelp.takeScreenShot(singleactivitySearch.getDateTime());
 				strRec="0";
+				SqlLiteHelper.createBug(aPage.getModule(), "", singleactivitySearch.getPlace(), singleactivitySearch.getDateTime(), screenshot);
 				log.info("No Activities displayed");
 				System.out.println("No Activities displayed");
 			}
@@ -86,6 +88,8 @@ public class SearchActivity {
 		{
 			strRec="0";
 			isPresent = aPage.getDriver().findElements(By.cssSelector("div[class='error_car_in']")).size() > 0;
+			String screenshot =genHelp.takeScreenShot("Car_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			SqlLiteHelper.createBug(aPage.getModule(), "", singleactivitySearch.getPlace(), singleactivitySearch.getDateTime(), screenshot);
 			genHelp.takeScreenShot("Activity_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
 			if (isPresent)
 			{	

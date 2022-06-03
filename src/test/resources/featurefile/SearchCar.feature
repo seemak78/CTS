@@ -10,5 +10,5 @@ Feature: Search Car
 
     Examples: 
       | message                        | fromcity | tocity  |addDaysFromToday | addDaysToFromToday |
-      | Welcome to Insider Travel Club | SFO      | SFO    |              60 |                  5 |
-      
+    #  | Welcome to Insider Travel Club | Ahmedabad	     | Ahmedabad    |              60 |                  5 |
+    | Welcome to Insider Travel Club | SFO		     | SFO    |              60 |                  5 |

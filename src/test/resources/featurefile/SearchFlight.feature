@@ -10,5 +10,6 @@ Feature: Search Flight
 
     Examples: 
       | message                        | fromcity | tocity  |addDaysFromToday | addDaysToFromToday |
-      | Welcome to Insider Travel Club | SFO      | LCY     |              60 |                  4 |
+     | Welcome to Insider Travel Club | SFO      | LCY     |              60 |                  4 |
       
+     # 0 search location  | Welcome to Insider Travel Club |KLH	      | USA    |              60 |                  4 |

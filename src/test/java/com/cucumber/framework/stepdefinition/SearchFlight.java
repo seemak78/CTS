@@ -81,7 +81,9 @@ public class SearchFlight {
 				System.out.println("Total Flights found: "+strRec+"- Lowest Price:"+lowestPrice);
 			} else
 			{
+				String screenshot = genHelp.takeScreenShot(singleFlightSearch.getDateTime());
 				strRec="0";
+				SqlLiteHelper.createBug(fPage.getModule(), "", singleFlightSearch.getPlace(), singleFlightSearch.getDateTime(), screenshot);
 				log.info("No Flights displayed");
 				System.out.println("No Flights displayed");
 			}
@@ -89,6 +91,8 @@ public class SearchFlight {
 		{
 			strRec="0";
 			isPresent = fPage.getDriver().findElements(By.cssSelector("div[class='error_flight']")).size() > 0;
+			String screenshot =genHelp.takeScreenShot("Car_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			SqlLiteHelper.createBug(fPage.getModule(), "", singleFlightSearch.getPlace(), singleFlightSearch.getDateTime(), screenshot);
 			genHelp.takeScreenShot("Flight_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
 			if (isPresent)
 			{	

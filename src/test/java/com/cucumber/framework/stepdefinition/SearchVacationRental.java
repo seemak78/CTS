@@ -72,6 +72,7 @@ public class SearchVacationRental {
 //		vPage.btnSearch.click();
 		String strDate=genHelp.dateCalculator(0,0, addDaysFuturedate);
 		singlevacationSearch.setStartDate(strDate);
+		singlevacationSearch.setEndDate(durOfStayinDays+" Days");
 
 		singlevacationSearch.setModule(vPage.getModule());
 		vPage.btnSearch.click();
@@ -100,12 +101,13 @@ public void find_number_of_VR() throws Throwable {
 			if (Integer.parseInt(strRec)>0)
 			{
 				lowestPrice= "0"; //aPage.lowestPrice.getText();
-				log.info("Total vacations found: "+strRec+"- Lowest Price:"+lowestPrice);
-		
+				log.info("Total vacations found: "+strRec+"- Lowest Price:"+lowestPrice);		
 				System.out.println("Total vacations found: "+strRec+"- Lowest Price:"+lowestPrice);
 			} else
 			{
+				String screenshot = genHelp.takeScreenShot(singlevacationSearch.getDateTime());
 				strRec="0";
+				SqlLiteHelper.createBug(vPage.getModule(), "", singlevacationSearch.getPlace(), singlevacationSearch.getDateTime(), screenshot);
 				log.info("No vacations displayed");
 				System.out.println("No vacations displayed");
 			}
@@ -113,7 +115,8 @@ public void find_number_of_VR() throws Throwable {
 		{
 			strRec="0";
 			isPresent = vPage.getDriver().findElements(By.xpath("div[class='//*[@id=\"result\"]/div/div/div/div[2]/div[2]/ul/li[1]/div']")).size() > 0;
-			genHelp.takeScreenShot("Activity_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			String screenshot =genHelp.takeScreenShot("Activity_search_failed_"+LocalDateTime.now().toString().replace("/","").replace(".", "").replace(":",""));
+			SqlLiteHelper.createBug(vPage.getModule(), "", singlevacationSearch.getPlace(), singlevacationSearch.getDateTime(), screenshot);
 			if (isPresent)
 			{	
 				softAssert.assertTrue(false, "Activity error");

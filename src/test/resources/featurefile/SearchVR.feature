@@ -10,6 +10,6 @@ Feature: Search VR
 
     Examples: 
      |         message                |    city         |addDaysFromToday | addDaysToFromToday |
-    # | Welcome to Insider Travel Club | ALASKA          |     60          |                  30|
-     | Welcome to Insider Travel Club | CALIFORNIA|     60          |                  30|
+   #  | Welcome to Insider Travel Club | ALASKA          |     60          |                  30|
+    | Welcome to Insider Travel Club | CALIFORNIA|     60          |                  30|
       

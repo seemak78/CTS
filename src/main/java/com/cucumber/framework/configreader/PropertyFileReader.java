@@ -136,7 +136,7 @@ public class PropertyFileReader implements IconfigReader {
 
 	public String getBugEmailAddressTo()
 	{
-		return prop.getProperty("email.for.bug");		
+		return prop.getProperty("email_for_bug");		
 	}
 	
 	@Override

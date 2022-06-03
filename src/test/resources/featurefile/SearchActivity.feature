@@ -10,5 +10,5 @@ Feature: Search Activity
  
     Examples: 
       |         message                |    city         |addDaysFromToday | addDaysToFromToday |
-      | Welcome to Insider Travel Club | Big Island      |     60          |                  5 |
+     | Welcome to Insider Travel Club | Big Island      |     60          |                  5 |
       

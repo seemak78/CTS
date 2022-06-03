@@ -109,7 +109,8 @@ public class SearchHotel {
 		NavigationHelper navHelp = new NavigationHelper(hPage.getDriver());
 		String strRec;
 		String lowestPrice=null;
-		if (hPage.hotelResults.size() > 0)
+		System.out.println((hPage.hotelResults.size()+": Number of hotels"+hPage.numOfHotels.getText()));
+		if (Integer.parseInt(hPage.numOfHotels.getText()) > 0)
 		{	
 
 				strRec = hPage.numOfHotels.getText();
@@ -120,7 +121,12 @@ public class SearchHotel {
 		} else
 		{
 			strRec="0";
-			String screenshot = genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("correlationId"));	
+			String screenshot = genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("correlationId"));
+			/*System.out.println("module"+hPage.getModule());
+			System.out.println("cor"+navHelp.getParamFromCurrentURL("correlationId"));
+			System.out.println("place"+singleHotelSearch.getPlace());
+			System.out.println("date"+singleHotelSearch.getDateTime());*/
+			
 			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);
 			
 			if (hPage.errorList.size()>0 )
