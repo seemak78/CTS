@@ -23,6 +23,7 @@ import com.cucumber.framework.helper.Wait.WaitHelper;
 import com.cucumber.framework.interfaces.IconfigReader;
 import com.cucumber.framework.settings.ObjectRepo;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -146,7 +147,64 @@ public class SearchHotel {
 		SqlLiteHelper.saveRecordsSearchResultsTable(singleHotelSearch);
 		//SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
 	}
+	
+	
+	@When("^: I am clicking on Select room$")
+	public void i_am_clicking_on_Select_room() throws Throwable {
+		NavigationHelper navHelp = new NavigationHelper(hPage.getDriver());
+		String strRoom;
+		if (Integer.parseInt(hPage.selRoom.getText()) > 0)
+		{
+			strRoom=hPage.selRoom.getText();
 
+	   System.out.println("print"+hPage.selRoom.getText());
+		}
+		else
+		{
+strRoom="0";
+String screenshot=genHelp.takeScreenShot
+(navHelp.getParamFromCurrentURL("correlationId"));
+System.out.println("cor"+navHelp.getParamFromCurrentURL("correlationId"));
+System.out.println("place"+singleHotelSearch.getPlace());
+			System.out.println("date"+singleHotelSearch.getDateTime());
+			
+			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);
+			
+			if (hPage.errorList.size()>0 )
+			{	
+				softAssert.assertTrue(false, "Hotel error");
+			}
+			else
+				System.out.println("Result section not available");
+}
+
+singleHotelSearch.setRoomRecords(Integer.parseInt(strRoom));
+		dtExecutionEnd = LocalDateTime.now();
+		singleHotelSearch.setExecutionEnd(dtExecutionEnd.toString());
+		singleHotelSearch.setDiffExecutionTime();
+		
+		singleHotelSearch.setModule(hPage.getModule());
+		singleHotelSearch.setCorelationId(navHelp.getParamFromCurrentURL("correlationId"));
+		SqlLiteHelper.saveRecordsSearchResultsTable(singleHotelSearch);
+		//SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
+	
+		hPage.selRoom.click(); 
+		//Thread.sleep(2000);		
+	
+	}
+	
+	@When("^: I am clicking on book Now$")
+	public void I_am_clicking_on_book_Now() throws Throwable {
+		WaitHelper wait = new WaitHelper(hPage.getDriver(), reader);		
+		wait.untilJqueryIsDone(80);
+	//	System.out.println("List:"+hPage.bookNowList.size());
+
+		System.out.println("list1:"+hPage.getDriver().findElements(By.cssSelector("#room_repet")).size());
+		//System.out.println("print:"+hPage.bookNow.size());
+		//hPage.getDriver().findElement(By.xpath("/html/body/div[4]/section/div/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/div[2]/div[2]/div/a")).click();
+	}
+	
+	
 	@Given("^: Generate report for all my searches$")
 	public void generate_report_for_all_my_searches() throws Throwable {
 		//hPage = new HotelPage(ObjectRepo.driver);

@@ -191,7 +191,7 @@ public class SqlLiteHelper {
 		{
 			PropertyFileReader reader = new PropertyFileReader();
 			String subject = "[Automation Bug] in "+module+" module no inventory is available";
-			String body = "While searching for location:"+location+" robot did not find invetory";
+			String body = "While searching for location:"+location+" robot did not find inventory";
 						if (coorelationid!=null && coorelationid!="") 
 						{
 							body= body + "<br><br>Please refer correlation id for further debugging:"+coorelationid;

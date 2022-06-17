@@ -65,6 +65,15 @@ public class HotelPage extends PageBase {
 	
 	@FindBy(how=How.XPATH,using="/html/body/div[2]/div[2]/div/div[1]/div/div/h1")
 	public List<WebElement> landingPageMessages;
+	
+	@FindBy(how=How.XPATH,using="//*[@id=\"prop-15202579\"]/div/div/div[1]/div/div[2]/div[4]/a")
+	public WebElement selRoom;
+	
+	@FindBy(how=How.XPATH,using="//*[@id=\"g1\"]/div[2]/div[1]/div/div/div[2]/div[2]/div/a")
+	public List<WebElement> bookNow;
+	
+	@FindBy(how=How.CLASS_NAME, using="av_btn")
+	public List<WebElement> bookNowList;	
 
 	
 	/** Public Methods  **/	
