@@ -1,12 +1,17 @@
 package com.cucumber.framework.stepdefinition;
 
+import java.awt.Checkbox;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -152,45 +157,24 @@ public class SearchHotel {
 	@When("^: I am clicking on Select room$")
 	public void i_am_clicking_on_Select_room() throws Throwable {
 		NavigationHelper navHelp = new NavigationHelper(hPage.getDriver());
-		String strRoom;
-		if (Integer.parseInt(hPage.selRoom.getText()) > 0)
+		String openDetailPageURL = hPage.selRoom.getAttribute("href");
+		hPage.getDriver().get(openDetailPageURL);
+		Thread.sleep(1000);
+		List<WebElement> allInputElements = hPage.getDriver().findElements(By.cssSelector(".btn.av_btn_text")); 
+		Integer intRoom=  allInputElements.size();  //hPage.bookNowList.size();
+		System.out.println("Achor tags::"+intRoom+":"+hPage.bookNowList.size());
+		if (intRoom <= 0)
 		{
-			strRoom=hPage.selRoom.getText();
-
-	   System.out.println("print"+hPage.selRoom.getText());
+			String screenshot=genHelp.takeScreenShot
+			(navHelp.getParamFromCurrentURL("correlationId"));
+			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);		
+		} else
+		{
+			
+			hPage.getDriver().get(allInputElements.get(0).getAttribute("href"));
+			Thread.sleep(200);
 		}
-		else
-		{
-strRoom="0";
-String screenshot=genHelp.takeScreenShot
-(navHelp.getParamFromCurrentURL("correlationId"));
-System.out.println("cor"+navHelp.getParamFromCurrentURL("correlationId"));
-System.out.println("place"+singleHotelSearch.getPlace());
-			System.out.println("date"+singleHotelSearch.getDateTime());
-			
-			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);
-			
-			if (hPage.errorList.size()>0 )
-			{	
-				softAssert.assertTrue(false, "Hotel error");
-			}
-			else
-				System.out.println("Result section not available");
-}
-
-singleHotelSearch.setRoomRecords(Integer.parseInt(strRoom));
-		dtExecutionEnd = LocalDateTime.now();
-		singleHotelSearch.setExecutionEnd(dtExecutionEnd.toString());
-		singleHotelSearch.setDiffExecutionTime();
 		
-		singleHotelSearch.setModule(hPage.getModule());
-		singleHotelSearch.setCorelationId(navHelp.getParamFromCurrentURL("correlationId"));
-		SqlLiteHelper.saveRecordsSearchResultsTable(singleHotelSearch);
-		//SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
-	
-		hPage.selRoom.click(); 
-		//Thread.sleep(2000);		
-	
 	}
 	
 	@When("^: I am clicking on book Now$")
@@ -202,12 +186,50 @@ singleHotelSearch.setRoomRecords(Integer.parseInt(strRoom));
 		System.out.println("list1:"+hPage.getDriver().findElements(By.cssSelector("#room_repet")).size());
 		//System.out.println("print:"+hPage.bookNow.size());
 		//hPage.getDriver().findElement(By.xpath("/html/body/div[4]/section/div/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/div[2]/div[2]/div/a")).click();
+		hPage.FirstName.sendKeys("Automation");
+		hPage.LastName.sendKeys("Bot");
+		Thread.sleep(2000);
+		hPage.FirstName1.sendKeys("Auto");
+		hPage.LastName1.sendKeys("Bot");
+		Thread.sleep(2000);
+		hPage.Continue.click();
+		hPage.FirstName2.sendKeys("Automation");
+		hPage.LastName2.sendKeys("Bot");
+		hPage.Email.sendKeys("automation@yopmail.com");
+		hPage.Contact.sendKeys("1234567890");
+		Thread.sleep(2000);
+		boolean isEnabled = hPage.Checkbox.isEnabled();
+		// performing click operation if element is enabled
+		if (isEnabled == true) {
+			hPage.Checkbox.click();
+		}
+		//Thread.sleep(2000);
+		hPage.Book.click();
+		Thread.sleep(2000);
+		hPage.getDriver().switchTo().frame(hPage.payPageMainFrame);
+		hPage.getDriver().switchTo().frame(hPage.payPageIframe);
+		boolean ccFieldAvaialbl= hPage.card.isDisplayed();
+		if (ccFieldAvaialbl)
+		{
+			
+			System.out.println("Payment Page is dispalyed!!");
+		}
+		else
+		{
+			NavigationHelper navHelp = new NavigationHelper(hPage.getDriver());
+			String screenshot = genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("correlationId"));
+			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);
+			System.out.println("Payment Page is not dispalyed!! Create Bug");
+		}
+			
+					
 	}
+	
 	
 	
 	@Given("^: Generate report for all my searches$")
 	public void generate_report_for_all_my_searches() throws Throwable {
-		//hPage = new HotelPage(ObjectRepo.driver);
+		//hPage = neelw HotelPage(ObjectRepo.driver);
 		genHelp = new GenericHelper(ObjectRepo.driver);
 		SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
 	}
