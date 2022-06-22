@@ -76,39 +76,39 @@ public class HotelPage extends PageBase {
 	public List<WebElement> bookNowList;	
 	
 	@FindBy(how=How.XPATH,using="//*[@id='step-1']/div/div/div/div[2]/div[1]/div/div[2]/input")
-	public WebElement FirstName;
+	public WebElement firstName;
 
 	@FindBy(how=How.XPATH,using="//*[@id=\"adult0\"]")
-	public WebElement LastName;
+	public WebElement lastName;
 	
 	@FindBy(how=How.XPATH,using="//*[@id=\"step-1\"]/div/div/div/div[2]/div[2]/div/div[2]/input")
-	public WebElement FirstName1;
+	public WebElement firstName1;
 
 	@FindBy(how=How.XPATH,using="//*//*[@id=\"step-1\"]/div/div/div/div[2]/div[2]/div/div[3]/input")
-	public WebElement LastName1;
+	public WebElement lastName1;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"nextBtn\"]")
-	public WebElement Continue;
+	public WebElement continu;
 	
 	@FindBy(how=How.XPATH,using="//*[@id=\"step-2\"]/div[1]/div/div/div[1]/div[2]/input")
-	public WebElement FirstName2;
+	public WebElement firstName2;
 
 	@FindBy(how=How.XPATH,using="//*[@id=\"step-2\"]/div[1]/div/div/div[1]/div[3]/input")
-	public WebElement LastName2;
+	public WebElement lastName2;
 	
 	@FindBy(how=How.XPATH,using="//*[@id=\"step-2\"]/div[1]/div/div/div[2]/div[1]/input")
-	public WebElement Email;
+	public WebElement email;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"step-2\"]/div[1]/div/div/div[2]/div[2]/input")
-	public WebElement Contact;
+	public WebElement contact;
 	
 	//@FindBy(how=How.XPATH,using="//*[@id=\"step-2\"]/div[2]/div/div/div/div/label/input")
 	
 	@FindBy(how=How.NAME,using="accept_terms")
-	public WebElement Checkbox;
+	public WebElement checkbox;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"payNowBtn\"]")
-	public WebElement Book;
+	public WebElement book;
 	
 	@FindBy(how=How.XPATH, using="//*[@id=\"card_number\"]")
 	public WebElement card;

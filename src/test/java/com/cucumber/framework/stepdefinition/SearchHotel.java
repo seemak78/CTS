@@ -186,25 +186,25 @@ public class SearchHotel {
 		System.out.println("list1:"+hPage.getDriver().findElements(By.cssSelector("#room_repet")).size());
 		//System.out.println("print:"+hPage.bookNow.size());
 		//hPage.getDriver().findElement(By.xpath("/html/body/div[4]/section/div/div/div/div/div/div/div/div[1]/div[2]/div[1]/div/div/div[2]/div[2]/div/a")).click();
-		hPage.FirstName.sendKeys("Automation");
-		hPage.LastName.sendKeys("Bot");
+		hPage.firstName.sendKeys("Automation");
+		hPage.lastName.sendKeys("Bot");
 		Thread.sleep(2000);
-		hPage.FirstName1.sendKeys("Auto");
-		hPage.LastName1.sendKeys("Bot");
+		hPage.firstName1.sendKeys("Auto");
+		hPage.lastName1.sendKeys("Bot");
 		Thread.sleep(2000);
-		hPage.Continue.click();
-		hPage.FirstName2.sendKeys("Automation");
-		hPage.LastName2.sendKeys("Bot");
-		hPage.Email.sendKeys("automation@yopmail.com");
-		hPage.Contact.sendKeys("1234567890");
+		hPage.continu.click();
+		hPage.firstName2.sendKeys("Automation");
+		hPage.lastName2.sendKeys("Bot");
+		hPage.email.sendKeys("automation@yopmail.com");
+		hPage.contact.sendKeys("1234567890");
 		Thread.sleep(2000);
-		boolean isEnabled = hPage.Checkbox.isEnabled();
+		boolean isEnabled = hPage.checkbox.isEnabled();
 		// performing click operation if element is enabled
 		if (isEnabled == true) {
-			hPage.Checkbox.click();
+			hPage.checkbox.click();
 		}
 		//Thread.sleep(2000);
-		hPage.Book.click();
+		hPage.book.click();
 		Thread.sleep(2000);
 		hPage.getDriver().switchTo().frame(hPage.payPageMainFrame);
 		hPage.getDriver().switchTo().frame(hPage.payPageIframe);
@@ -229,7 +229,7 @@ public class SearchHotel {
 	
 	@Given("^: Generate report for all my searches$")
 	public void generate_report_for_all_my_searches() throws Throwable {
-		//hPage = neelw HotelPage(ObjectRepo.driver);
+		//hPage = new HotelPage(ObjectRepo.driver);
 		genHelp = new GenericHelper(ObjectRepo.driver);
 		SqlLiteHelper.createSearchReport(genHelp.dateCalculator(0, 0, 0, "dd-MMM-yyyy"));
 	}

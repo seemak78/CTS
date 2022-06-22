@@ -3,11 +3,14 @@ package com.cucumber.framework.stepdefinition;
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
@@ -16,11 +19,13 @@ import com.cucumber.framework.helper.DatabaseHelper.Searchreport;
 import com.cucumber.framework.helper.DatabaseHelper.SqlLiteHelper;
 import com.cucumber.framework.helper.Generic.GenericHelper;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
+import com.cucumber.framework.helper.Navigation.NavigationHelper;
 import com.cucumber.framework.helper.PageObject.homepage.CarPage;
 import com.cucumber.framework.helper.Wait.WaitHelper;
 import com.cucumber.framework.interfaces.IconfigReader;
 import com.cucumber.framework.settings.ObjectRepo;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 
 /**
@@ -119,5 +124,45 @@ public class SearchCar {
 		singleCarSearch.setCorelationId("NA");
 		SqlLiteHelper.saveRecordsSearchResultsTable(singleCarSearch);
 		//createSearchReport();
+	}
+	
+	@And("^: I am clicking on book$")
+		public   void I_am_clicking_on_book() throws Throwable {
+		NavigationHelper navHelp = new NavigationHelper(cPage.getDriver());
+		String openDetailPageURL= cPage.bookNow.getAttribute("href");
+		cPage.getDriver().get(openDetailPageURL);
+		Thread.sleep(1000);
+		List<WebElement> allInputElements = cPage.getDriver().findElements(By.cssSelector(".booknowCarbtn")); 
+		Integer intCar=  allInputElements.size();  
+		System.out.println("Anchor tags::"+intCar+":"+cPage.bookNow);
+		
+		Select title=new Select(cPage.title);
+		//title.selectByVisibleText("Mr");
+		title.selectByValue("Mr");
+		cPage.contactno.sendKeys("1234567890");
+		Select country=new Select(cPage.country);
+		country.selectByVisibleText("United States");
+		Thread.sleep(2000);
+		
+		//boolean isEnabled = cPage.check.isEnabled();
+		// performing click operation if element is enabled
+		//if (isEnabled == true) {
+			//cPage.check.click();
+		//}
+		//Thread.sleep(2000);
+		//cPage.bookN.click();	
+		
+		if (intCar <= 0)
+		{			
+			String screenshot=genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("CAR"));
+			SqlLiteHelper.createBug(cPage.getModule(),"", singleCarSearch.getPlace(), singleCarSearch.getDateTime(), screenshot);		
+		} else
+		{
+			
+			cPage.getDriver().get(allInputElements.get(0).getAttribute("href"));
+			Thread.sleep(200);
+		}
+	
+		
 	}
 }
