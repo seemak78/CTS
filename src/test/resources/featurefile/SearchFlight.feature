@@ -10,6 +10,7 @@ Feature: Search Flight
 
     Examples: 
      | message                        | fromcity | tocity  |addDaysFromToday | addDaysToFromToday |
+     | Welcome to Insider Travel Club | ORD      | LAS     |              60 |                  4 |
      | Welcome to Insider Travel Club | SFO      | LCY     |              60 |                  4 |
      | Welcome to Insider Travel Club | BOM      | DEL     |              60 |                  4 |
      | Welcome to Insider Travel Club | SYD      | MEL     |              60 |                  4 |
@@ -17,7 +18,6 @@ Feature: Search Flight
      | Welcome to Insider Travel Club | LHR      | DXB     |              60 |                  4 |
      | Welcome to Insider Travel Club | AUH      | BOM     |              60 |                  4 |
      | Welcome to Insider Travel Club | SIN      | LON     |              60 |                  4 |
-     | Welcome to Insider Travel Club | ORD      | LAS     |              60 |                  4 |
      | Welcome to Insider Travel Club | DFW      | CLL     |              60 |                  4 |
      | Welcome to Insider Travel Club | CGK      | DPS     |              60 |                  4 |
      | Welcome to Insider Travel Club | CPT      | JNB     |              60 |                  4 |

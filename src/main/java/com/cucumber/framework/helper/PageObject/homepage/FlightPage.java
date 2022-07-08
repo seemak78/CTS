@@ -72,6 +72,48 @@ public class FlightPage extends PageBase {
 	@FindBy(how=How.CSS,using="li[class='main_li_box']")
 	public List<WebElement> resultBoxes;
 	
+	@FindBy(how=How.XPATH,using="//*[@id=\"result\"]/div[2]/div/div/div[2]/div[3]/ul/li[1]/div/div[3]/div[2]/a")
+	public List<WebElement> bookNo;
+	
+	@FindBy(how=How.ID,using="adulthtml1")
+	public WebElement passenger;
+	
+	@FindBy(how=How.NAME,using="title[]")
+	public WebElement title;
+	
+	@FindBy(how=How.NAME,using="bdate[]")
+	public WebElement birthdate;
+	
+	@FindBy(how=How.NAME,using="gender[]")
+	public WebElement gender;
+	
+	@FindBy(how=How.NAME,using="nationality[]")
+	public WebElement coun;
+	
+	@FindBy(how=How.NAME,using="postcode")
+	public WebElement postal;
+	
+	@FindBy(how=How.NAME,using="phonenumber")
+	public WebElement phone;
+	
+	@FindBy(how=How.XPATH,using="//*[@id=\"formCheckout\"]/div/div[1]/div/div[2]/div[4]/button")
+	public WebElement book;
+	
+	@FindBy(how=How.XPATH,using="/html/body/iframe")
+	public WebElement mainFrame;
+	
+	@FindBy(how=How.XPATH,using="/html/body/div/div/iframe")
+	public WebElement subFrame1;
+	
+	@FindBy(how=How.CSS,using=".razorpay-checkout-frame")
+	public WebElement subFrame2;
+	
+	
+	
+	@FindBy(how=How.ID,using="email")
+	public WebElement email;
+	
+	
 	/** Public Methods  **/	
 	public WebDriver getDriver() {
 		return this.driver;

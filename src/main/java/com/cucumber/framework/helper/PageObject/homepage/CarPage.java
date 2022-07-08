@@ -73,7 +73,7 @@ public class CarPage extends PageBase {
 	@FindBy(how=How.NAME,using="nationality")
 	public WebElement country;
 	
-	@FindBy(how=How.NAME,using="terms_condition_checkbox")
+	@FindBy(how=How.XPATH,using="/html/body/div[3]/div/div[6]/div/div/div[2]/div/form/div[1]/div[2]/div[9]/ul/li[1]/label/span")
 	public WebElement check;
 	
 	@FindBy(how=How.XPATH,using="/html/body/div[3]/div/div[6]/div/div/div[2]/div/form/div[1]/div[2]/div[10]/button")

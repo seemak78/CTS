@@ -57,7 +57,11 @@ public class ActivityPage extends PageBase {
 	@FindBy(how=How.XPATH,using="/html/body/div[3]/div/section/div/div/div/div[1]/div[1]/div/div")
 	public List<WebElement> resultBoxes;
 	
+	@FindBy(how=How.ID,using="activities_detail_show0")
+	public WebElement show;
 	
+	@FindBy(how=How.XPATH,using="//*[@id=\"activities_details_tab\"]/ul/li[2]/a/span")
+	public WebElement booK; 
 	
 	/** Public Methods  **/	
 	public WebDriver getDriver() {

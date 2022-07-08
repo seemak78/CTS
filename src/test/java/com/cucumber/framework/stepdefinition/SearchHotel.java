@@ -120,8 +120,6 @@ public class SearchHotel {
 		{	
 
 				strRec = hPage.numOfHotels.getText();
-				
-
 				lowestPrice = hPage.lowestPrice.getText();
 				System.out.println("Total Results found: "+strRec+": Lowest Price:"+lowestPrice);
 		} else
@@ -165,12 +163,14 @@ public class SearchHotel {
 		System.out.println("Achor tags::"+intRoom+":"+hPage.bookNowList.size());
 		if (intRoom <= 0)
 		{
+			System.out.println("Not found Hotel rooms");
 			String screenshot=genHelp.takeScreenShot
 			(navHelp.getParamFromCurrentURL("correlationId"));
 			SqlLiteHelper.createBug(hPage.getModule(), navHelp.getParamFromCurrentURL("correlationId"), singleHotelSearch.getPlace(), singleHotelSearch.getDateTime(), screenshot);		
 		} else
 		{
 			
+			System.out.println("Found Hotel rooms");
 			hPage.getDriver().get(allInputElements.get(0).getAttribute("href"));
 			Thread.sleep(200);
 		}

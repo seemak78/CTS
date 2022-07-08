@@ -2,9 +2,11 @@ package com.cucumber.framework.stepdefinition;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 
 import com.cucumber.framework.configreader.PropertyFileReader;
@@ -12,6 +14,7 @@ import com.cucumber.framework.helper.DatabaseHelper.Searchreport;
 import com.cucumber.framework.helper.DatabaseHelper.SqlLiteHelper;
 import com.cucumber.framework.helper.Generic.GenericHelper;
 import com.cucumber.framework.helper.Logger.LoggerHelper;
+import com.cucumber.framework.helper.Navigation.NavigationHelper;
 import com.cucumber.framework.helper.PageObject.homepage.ActivityPage;
 import com.cucumber.framework.helper.PageObject.homepage.CarPage;
 import com.cucumber.framework.helper.Wait.WaitHelper;
@@ -129,5 +132,12 @@ public class SearchActivity {
   
         return str;
     }
-  
+	
+	@When("^: I am clicking on show$")
+	public void i_am_clicking_on_show() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    aPage.show.click();
+	    aPage.booK.click();
+	    Thread.sleep(2000);
+	}
 }

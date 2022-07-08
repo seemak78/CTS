@@ -142,27 +142,12 @@ public class SearchCar {
 		cPage.contactno.sendKeys("1234567890");
 		Select country=new Select(cPage.country);
 		country.selectByVisibleText("United States");
-		Thread.sleep(2000);
+		cPage.check.click();
+		Thread.sleep(2000);		//Do not use this button otherwise booking will be done......cPage.bookN.click();
+		System.out.println("clicking on booking is successfull");
 		
-		//boolean isEnabled = cPage.check.isEnabled();
-		// performing click operation if element is enabled
-		//if (isEnabled == true) {
-			//cPage.check.click();
-		//}
-		//Thread.sleep(2000);
-		//cPage.bookN.click();	
 		
-		if (intCar <= 0)
-		{			
-			String screenshot=genHelp.takeScreenShot(navHelp.getParamFromCurrentURL("CAR"));
-			SqlLiteHelper.createBug(cPage.getModule(),"", singleCarSearch.getPlace(), singleCarSearch.getDateTime(), screenshot);		
-		} else
-		{
 			
-			cPage.getDriver().get(allInputElements.get(0).getAttribute("href"));
-			Thread.sleep(200);
-		}
-	
 		
 	}
 }
